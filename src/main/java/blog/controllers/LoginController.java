@@ -2,7 +2,7 @@ package blog.controllers;
 
 import blog.forms.LoginForm;
 import blog.services.NotificationService;
-import blog.services.UserServices;
+import blog.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -16,8 +16,9 @@ import javax.validation.Valid;
  */
 @Controller
 public class LoginController {
+
     @Autowired
-    private UserServices userServices;
+    private UserService userService;
 
     @Autowired
     private NotificationService notifyServices;
@@ -34,7 +35,7 @@ public class LoginController {
             return "users/login";
         }
 
-        if(!userServices.authenticate(
+        if(!userService.authenticate(
                 loginForm.getUsername(), loginForm.getPassword())) {
             notifyServices.addErrorMessage("Invalid login!");
             return "users/login";

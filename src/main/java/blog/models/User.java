@@ -28,9 +28,24 @@ public class User {
     @OneToMany(mappedBy = "author")
     private Set<Post> posts = new HashSet<>();
 
+    public User() {
+    }
+
+    public User(String username, String fullName) {
+        this.username = username;
+        this.fullName = fullName;
+    }
+
+
     public User(Long id, String username, String fullName) {
         this.id = id;
         this.username = username;
+        this.fullName = fullName;
+    }
+
+    public User(String fullName, String username, String passwordHash) {
+        this.username = username;
+        this.passwordHash = passwordHash;
         this.fullName = fullName;
     }
 
@@ -72,14 +87,6 @@ public class User {
 
     public void setPosts(Set<Post> posts) {
         this.posts = posts;
-    }
-
-    public User() {
-    }
-
-    public User(String username, String fullName) {
-        this.username = username;
-        this.fullName = fullName;
     }
 
     @Override
